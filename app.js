@@ -1,4 +1,10 @@
+const BASE_URL =
+  "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies";
+
 const dropdowns = document.querySelectorAll(".dropdown select");
+const btn = document.querySelector("form button");
+const fromCurr = document.querySelector(".from select");
+const toCurr = document.querySelector(".to Select");
 
 for(let select of dropdowns){
     for(currCode in countryList){
@@ -13,4 +19,16 @@ for(let select of dropdowns){
         }
         select.append(newOption);
     }
+
+    select.addEventListener("change", (evt) => {
+        updateFlag(evt.target);
+    });
 }
+
+const updateFlag = (element) => {
+    let currCode = element.value;
+    let countryCode = countryList[currCode];
+    let newSrc = `https://flagsapi.com/${countryCode}/flat/64.png`;
+    let img = element.parentElement.querySelector("img");
+    img.src = newSrc;
+};
